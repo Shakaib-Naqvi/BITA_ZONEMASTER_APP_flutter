@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "435634185408",
+    "project_id": "zonemaster-366a1",
+    "storage_bucket": "zonemaster-366a1.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:435634185408:android:871992c2281a9487467925",
+        "android_client_info": {
+          "package_name": "com.bitahomes.zonemaster"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC1MyRb_m07x_YbEk4pEwPRhZoW9Z_Kydk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
