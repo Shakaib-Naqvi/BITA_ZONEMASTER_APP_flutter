@@ -38,7 +38,7 @@ dependencies:
   mobile_scanner: ^6.0.1
   wifi_iot: ^0.3.19+1
   http: ^1.2.2
-  permission_handler:
+  permission_handler: ^11.3.1
   mqtt_client: ^10.5.1
   firebase_core: ^3.8.1
   cloud_firestore: ^5.5.1

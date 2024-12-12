@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:testappbita/Device/device.dart';
 import 'package:wifi_iot/wifi_iot.dart';
 import 'package:testappbita/Device/pannel.dart';
 import 'package:testappbita/open_folder/singin.dart';
@@ -11,11 +12,8 @@ void main() {
 }
 
 Future<void> saveDevice(String email, String deviceId, String IP,
-    String macaddress, String name) async {
-  await FirebaseFirestore.instance
-      .collection(email)
-      .doc(deviceId.toString())
-      .set({
+    String macaddress, String name, String ssiddd) async {
+  await FirebaseFirestore.instance.collection(email).doc(ssiddd).set({
     'device id': deviceId,
     'device ip': IP,
     'device mac': macaddress,
@@ -53,7 +51,7 @@ class _QRCodeScannerState extends State<QRCodeScanner> {
   MobileScannerController cameraController = MobileScannerController();
   List<Map<String, String>> scannedConnections = [];
   String? _previousSSID;
-  int _selectedIndex = 0;
+  int _selectedIndex = 1;
   int id = 0;
   // String email = widget.email;
 
@@ -102,7 +100,7 @@ class _QRCodeScannerState extends State<QRCodeScanner> {
         // saveDevice("1", widget.email, ssid, password);
         // saveDevice(ssid.toString(), ssid, password, "12313");
 
-        // _connectToWiFi(ssid, password);
+        _connectToWiFi(ssid, password);
         //  _showWiFiDialog(ssid);
         _showWiFiDialog(ssid, password);
         _showdevicenameDialog(ssid, password);
@@ -253,17 +251,7 @@ class _QRCodeScannerState extends State<QRCodeScanner> {
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
-      if (_selectedIndex == 1) {
-        // Navigator.push(
-        //   context,
-        //   MaterialPageRoute(
-        //     builder: (_) => ConnectionResultScreen(
-        //       result: "Scanned Connections",
-        //       connections: scannedConnections,
-        //     ),
-        //   ),
-        // );
-
+      if (_selectedIndex == 0) {
         Navigator.push(
           context,
           MaterialPageRoute(
@@ -274,7 +262,7 @@ class _QRCodeScannerState extends State<QRCodeScanner> {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (_) => const SettingsScreen(),
+            builder: (_) => SettingsScreen(email: widget.email),
           ),
         );
       }
@@ -429,7 +417,7 @@ class _QRCodeScannerState extends State<QRCodeScanner> {
                 }
                 // id++;
                 // saveDevice(ssid.toString(), ssidd, pass, ip);
-                saveDevice(widget.email, id, ip, mac, ssidd);
+                saveDevice(widget.email, id, ip, mac, ssidd, ssid);
                 Navigator.of(context).pop();
               },
             ),
@@ -441,55 +429,68 @@ class _QRCodeScannerState extends State<QRCodeScanner> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('QR Code Scanner'),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.flip_camera_ios),
-            onPressed: () => cameraController.switchCamera(),
+    // ignore: deprecated_member_use
+    return WillPopScope(
+      onWillPop: () async {
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(
+            builder: (context) => DevicesPage(email: widget.email),
           ),
-        ],
-      ),
-      body: Column(
-        children: [
-          Container(
-            margin: const EdgeInsets.all(16),
-            height: 200,
-            width: double.infinity,
-            decoration: BoxDecoration(
-              border: Border.all(color: Colors.blue, width: 3),
-              borderRadius: BorderRadius.circular(12),
+          (route) => false, // Remove all routes from the stack
+        );
+        return false; // Prevent the default back button behavior
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('QR Code Scanner'),
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.flip_camera_ios),
+              onPressed: () => cameraController.switchCamera(),
             ),
-            child: isScanning
-                ? ClipRRect(
-                    borderRadius: BorderRadius.circular(12),
-                    child: MobileScanner(
-                      controller: cameraController,
-                      onDetect: _onDetect,
-                    ),
-                  )
-                : const Center(child: Text('Scanning stopped')),
-          ),
-        ],
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _selectedIndex,
-        onTap: _onItemTapped,
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.devices),
-            label: 'Device',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            label: 'Settings',
-          ),
-        ],
+          ],
+        ),
+        body: Column(
+          children: [
+            Container(
+              margin: const EdgeInsets.all(16),
+              height: 200,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.blue, width: 3),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: isScanning
+                  ? ClipRRect(
+                      borderRadius: BorderRadius.circular(12),
+                      child: MobileScanner(
+                        controller: cameraController,
+                        onDetect: _onDetect,
+                      ),
+                    )
+                  : const Center(child: Text('Scanning stopped')),
+            ),
+          ],
+        ),
+        bottomNavigationBar: BottomNavigationBar(
+          currentIndex: 1,
+          onTap: _onItemTapped,
+          items: const <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: 'Home',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.devices),
+              label: 'Add Device',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.settings),
+              label: 'Settings',
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -513,69 +514,70 @@ void disconnectwifi() async {
 // void _navigateToAddDevicePage(BuildContext context) {
 //   Navigator.push(
 //     context,
-//     MaterialPageRoute(builder: (context) => DevicesPage(
-//                             email: widget.email)),
+//     MaterialPageRoute(
+//         builder: (context) => DevicesPage(
+//             email: widget.email)), // Replace with your target screen
 //   );
 // }
 
-class DevicesPage extends StatelessWidget {
-  String email;
-  DevicesPage({required this.email});
+// class DevicesPage extends StatelessWidget {
+//   String email;
+//   DevicesPage({required this.email});
 
-  // Function to get the stream of devices from Firestore
-  Stream<QuerySnapshot> getDevices() {
-    return FirebaseFirestore.instance.collection(email).snapshots();
-  }
+//   // Function to get the stream of devices from Firestore
+//   Stream<QuerySnapshot> getDevices() {
+//     return FirebaseFirestore.instance.collection(email).snapshots();
+//   }
 
-  // Function to navigate to another screen (for example, DeviceDetailsPage)
+//   // Function to navigate to another screen (for example, DeviceDetailsPage)
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text("Devices")),
-      body: StreamBuilder<QuerySnapshot>(
-        stream: getDevices(), // Listening to the stream
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(
-                child:
-                    CircularProgressIndicator()); // Show loading indicator while waiting
-          }
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(title: Text("Devices")),
+//       body: StreamBuilder<QuerySnapshot>(
+//         stream: getDevices(), // Listening to the stream
+//         builder: (context, snapshot) {
+//           if (snapshot.connectionState == ConnectionState.waiting) {
+//             return Center(
+//                 child:
+//                     CircularProgressIndicator()); // Show loading indicator while waiting
+//           }
 
-          if (snapshot.hasError) {
-            return Center(child: Text('Error: ${snapshot.error}'));
-          }
+//           if (snapshot.hasError) {
+//             return Center(child: Text('Error: ${snapshot.error}'));
+//           }
 
-          if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-            return Center(child: Text('No devices found.'));
-          }
+//           if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+//             return Center(child: Text('No devices found.'));
+//           }
 
-          // Get the documents from the snapshot
-          var devices = snapshot.data!.docs;
+//           // Get the documents from the snapshot
+//           var devices = snapshot.data!.docs;
 
-          return ListView.builder(
-            itemCount: devices.length,
-            itemBuilder: (context, index) {
-              var device = devices[index];
-              // Assuming 'name' and 'status' fields exist in the document
-              return ListTile(
-                title: Text(device["device name"] ?? 'No name'),
-                subtitle:
-                    Text('device id: ${device['device id'] ?? 'Unknown'}'),
-              );
-            },
-          );
-        },
-      ),
-      // Floating action button to trigger navigation
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => QRCodeScanner(email: email),
-        child: Icon(Icons.add), // Icon for the button
-        tooltip: 'Add Device',
-      ),
-    );
-  }
-}
+//           return ListView.builder(
+//             itemCount: devices.length,
+//             itemBuilder: (context, index) {
+//               var device = devices[index];
+//               // Assuming 'name' and 'status' fields exist in the document
+//               return ListTile(
+//                 title: Text(device["device name"] ?? 'No name'),
+//                 subtitle:
+//                     Text('device id: ${device['device id'] ?? 'Unknown'}'),
+//               );
+//             },
+//           );
+//         },
+//       ),
+//       // Floating action button to trigger navigation
+//       floatingActionButton: FloatingActionButton(
+//         onPressed: () => QRCodeScanner(email: email),
+//         child: Icon(Icons.add), // Icon for the button
+//         tooltip: 'Add Device',
+//       ),
+//     );
+//   }
+// }
 
 class ConnectionResultScreen extends StatefulWidget {
   final String result;
@@ -589,8 +591,8 @@ class ConnectionResultScreen extends StatefulWidget {
 }
 
 class _ConnectionResultScreenState extends State<ConnectionResultScreen> {
-  String? ssid;
-  String? password;
+  String ssid = "";
+  String password = "";
   String? connectionStatus = 'Not Connected';
 
   @override
@@ -606,13 +608,13 @@ class _ConnectionResultScreenState extends State<ConnectionResultScreen> {
 
     if (match != null) {
       setState(() {
-        ssid = match.namedGroup('ssid');
-        password = match.namedGroup('password');
+        ssid = match.namedGroup('ssid')!;
+        password = match.namedGroup('password')!;
       });
     } else {
       setState(() {
-        ssid = widget.result;
-        password = null; // No password detected
+        ssid = "";
+        password = ""; // No password detected
       });
     }
   }
@@ -640,7 +642,7 @@ class _ConnectionResultScreenState extends State<ConnectionResultScreen> {
       // Navigate to the Pannel screen directly upon a successful connection
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => const Pannel()),
+        MaterialPageRoute(builder: (context) => Pannel(topicssid: ssid)),
       );
     } else {
       _showConnectionStatusDialog(context, connectionStatusMessage);
@@ -740,10 +742,10 @@ class _ConnectionResultScreenState extends State<ConnectionResultScreen> {
             children: [
               GestureDetector(
                 onTap: () {
-                  // Navigate to the new screen when tapped
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => Pannel()),
+                    MaterialPageRoute(
+                        builder: (context) => Pannel(topicssid: ssid)),
                   );
                 },
                 child: Align(
@@ -824,7 +826,9 @@ class _ConnectionResultScreenState extends State<ConnectionResultScreen> {
 }
 
 class SettingsScreen extends StatefulWidget {
-  const SettingsScreen({super.key});
+  String email;
+  // const SettingsScreen({super.key});
+  SettingsScreen({required this.email});
 
   @override
   _SettingsScreenState createState() => _SettingsScreenState();
@@ -834,33 +838,115 @@ class _SettingsScreenState extends State<SettingsScreen> {
   double _sliderValue1 = 0.5;
   double _sliderValue2 = 0.5;
   double _sliderValue3 = 0.5;
-  int _selectedIndex = 0;
+  int _selectedIndex = 2;
 
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
     });
-    if (index == 1) {
+    if (index == 0) {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => const Pannel()),
+        MaterialPageRoute(
+            builder: (context) => DevicesPage(
+                email: widget.email)), // Replace with your target screen
+      );
+    } else if (index == 1) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => QRCodeScanner(
+                email: widget.email)), // Replace with your target screen
       );
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Settings'),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            Container(
-              margin: const EdgeInsets.only(bottom: 16.0),
-              child: Row(
+    //
+    // ignore: deprecated_member_use
+    return WillPopScope(
+      onWillPop: () async {
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(
+            builder: (context) => DevicesPage(email: widget.email),
+          ),
+          (route) => false, // Remove all routes from the stack
+        );
+        return false; // Prevent the default back button behavior
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('Settings'),
+        ),
+        body: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            children: [
+              Container(
+                margin: const EdgeInsets.only(bottom: 16.0),
+                child: Row(
+                  children: [
+                    const Icon(Icons.access_time),
+                    const SizedBox(width: 10),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            'Dashboard item opacity',
+                            style: TextStyle(fontSize: 18),
+                          ),
+                          Slider(
+                            value: _sliderValue1,
+                            min: 0,
+                            max: 1,
+                            onChanged: (value) {
+                              setState(() {
+                                _sliderValue1 = value;
+                              });
+                            },
+                          ),
+                          Text('Value: ${_sliderValue1.toStringAsFixed(2)}'),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                margin: const EdgeInsets.only(bottom: 16.0),
+                child: Row(
+                  children: [
+                    const Icon(Icons.brightness_6),
+                    const SizedBox(width: 10),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            'Device item opacity',
+                            style: TextStyle(fontSize: 18),
+                          ),
+                          Slider(
+                            value: _sliderValue2,
+                            min: 0,
+                            max: 1,
+                            onChanged: (value) {
+                              setState(() {
+                                _sliderValue2 = value;
+                              });
+                            },
+                          ),
+                          Text('Value: ${_sliderValue2.toStringAsFixed(2)}'),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Row(
                 children: [
                   const Icon(Icons.access_time),
                   const SizedBox(width: 10),
@@ -869,117 +955,59 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const Text(
-                          'Dashboard item opacity',
+                          'Data interval',
                           style: TextStyle(fontSize: 18),
                         ),
                         Slider(
-                          value: _sliderValue1,
+                          value: _sliderValue3,
                           min: 0,
                           max: 1,
                           onChanged: (value) {
                             setState(() {
-                              _sliderValue1 = value;
+                              _sliderValue3 = value;
                             });
                           },
                         ),
-                        Text('Value: ${_sliderValue1.toStringAsFixed(2)}'),
+                        Text('Value: ${_sliderValue3.toStringAsFixed(2)}'),
                       ],
                     ),
                   ),
                 ],
               ),
-            ),
-            Container(
-              margin: const EdgeInsets.only(bottom: 16.0),
-              child: Row(
-                children: [
-                  const Icon(Icons.brightness_6),
-                  const SizedBox(width: 10),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text(
-                          'Device item opacity',
-                          style: TextStyle(fontSize: 18),
-                        ),
-                        Slider(
-                          value: _sliderValue2,
-                          min: 0,
-                          max: 1,
-                          onChanged: (value) {
-                            setState(() {
-                              _sliderValue2 = value;
-                            });
-                          },
-                        ),
-                        Text('Value: ${_sliderValue2.toStringAsFixed(2)}'),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Row(
-              children: [
-                const Icon(Icons.access_time),
-                const SizedBox(width: 10),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text(
-                        'Data interval',
-                        style: TextStyle(fontSize: 18),
-                      ),
-                      Slider(
-                        value: _sliderValue3,
-                        min: 0,
-                        max: 1,
-                        onChanged: (value) {
-                          setState(() {
-                            _sliderValue3 = value;
-                          });
-                        },
-                      ),
-                      Text('Value: ${_sliderValue3.toStringAsFixed(2)}'),
-                    ],
-                  ),
+              Container(
+                margin: const EdgeInsets.only(top: 32.0),
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const Signin()),
+                    );
+                  },
+                  child: const Text('Sign Out'),
                 ),
-              ],
-            ),
-            Container(
-              margin: const EdgeInsets.only(top: 32.0),
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const Signin()),
-                  );
-                },
-                child: const Text('Sign Out'),
               ),
+            ],
+          ),
+        ),
+        bottomNavigationBar: BottomNavigationBar(
+          currentIndex: 2,
+          onTap: _onItemTapped,
+          items: const <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              // icon: Icon(Icons.settings),
+              label: 'Home',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.devices),
+              label: 'Add Device',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.settings),
+              label: 'Settings',
             ),
           ],
         ),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _selectedIndex,
-        onTap: _onItemTapped,
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            label: 'Settings',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.devices),
-            label: 'Device',
-          ),
-        ],
       ),
     );
   }

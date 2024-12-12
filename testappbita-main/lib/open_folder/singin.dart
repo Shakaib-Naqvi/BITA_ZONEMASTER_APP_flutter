@@ -1,3 +1,4 @@
+import 'package:testappbita/Device/device.dart';
 import 'package:testappbita/main.dart';
 import 'package:testappbita/Home_Screen/Home.dart';
 import 'package:testappbita/open_folder/singup.dart';
@@ -5,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Signin extends StatefulWidget {
+  // String email;
   const Signin({super.key});
 
   @override
@@ -67,8 +69,7 @@ class SigninState extends State<Signin> {
     // If validation passes, navigate to HomeScreen
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(
-          builder: (context) => Work(email: email)), // Navigate to HomeScreen
+      MaterialPageRoute(builder: (context) => DevicesPage(email: email)),
     );
   }
 

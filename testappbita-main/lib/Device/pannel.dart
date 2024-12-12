@@ -6,7 +6,8 @@ import 'dart:convert'; // Import for JSON encoding
 MqttServerClient? client;
 
 class Pannel extends StatefulWidget {
-  const Pannel({super.key});
+  String topicssid;
+  Pannel({required this.topicssid});
 
   @override
   _PannelState createState() => _PannelState();
@@ -54,12 +55,12 @@ class _PannelState extends State<Pannel> {
 
     // Subscribe to specified topics
     client?.subscribe('/KRC/1', MqttQos.atLeastOnce);
-    client?.subscribe('/KRC/2', MqttQos.atLeastOnce);
-    client?.subscribe('/KRC/3', MqttQos.atLeastOnce);
-    client?.subscribe('/KRC/4', MqttQos.atLeastOnce);
-    client?.subscribe('thermostat/temp', MqttQos.atLeastOnce);
-    client?.subscribe('thermostat/range', MqttQos.atLeastOnce);
-    client?.subscribe('thermostat/switch', MqttQos.atLeastOnce);
+    // client?.subscribe('/KRC/2', MqttQos.atLeastOnce);
+    // client?.subscribe('/KRC/3', MqttQos.atLeastOnce);
+    // client?.subscribe('/KRC/4', MqttQos.atLeastOnce);
+    // client?.subscribe('thermostat/temp', MqttQos.atLeastOnce);
+    // client?.subscribe('thermostat/range', MqttQos.atLeastOnce);
+    // client?.subscribe('thermostat/switch', MqttQos.atLeastOnce);
 
     client?.updates!.listen((List<MqttReceivedMessage<MqttMessage>>? c) {
       final MqttPublishMessage msg = c![0].payload as MqttPublishMessage;
@@ -75,30 +76,32 @@ class _PannelState extends State<Pannel> {
           case '/KRC/1':
             // Handle message for /KRC/1
             break;
-          case '/KRC/2':
-            // Handle message for /KRC/2
-            break;
-          case '/KRC/3':
-            // Handle message for /KRC/3
-            break;
-          case '/KRC/4':
-            // Handle message for /KRC/4
-            break;
-          case 'thermostat/temp':
-            _thermostatTemperature =
-                double.tryParse(message) ?? _thermostatTemperature;
-            break;
-          case 'thermostat/range':
-            List<String> values = message.split('-');
-            if (values.length == 2) {
-              _currentRangeValues = RangeValues(
-                double.tryParse(values[0]) ?? _currentRangeValues.start,
-                double.tryParse(values[1]) ?? _currentRangeValues.end,
-              );
-            }
-            break;
-          case 'thermostat/switch':
-            isOn = message == "ON";
+          // case '/KRC/2':
+          //   // Handle message for /KRC/2
+          //   break;
+          // case '/KRC/3':
+          //   // Handle message for /KRC/3
+          //   break;
+          // case '/KRC/4':
+          //   // Handle message for /KRC/4
+          //   break;
+          // case 'thermostat/temp':
+          //   _thermostatTemperature =
+          //       double.tryParse(message) ?? _thermostatTemperature;
+          //   break;
+          // case 'thermostat/range':
+          //   List<String> values = message.split('-');
+          //   if (values.length == 2) {
+          //     _currentRangeValues = RangeValues(
+          //       double.tryParse(values[0]) ?? _currentRangeValues.start,
+          //       double.tryParse(values[1]) ?? _currentRangeValues.end,
+          //     );
+          //   }
+          //   break;
+          // case 'thermostat/switch':
+          //   isOn = message == "ON";
+          //   break;
+          default:
             break;
         }
       });
@@ -139,18 +142,43 @@ class _PannelState extends State<Pannel> {
     };
   }
 
-
   // Create a method to publish the JSON message
-  String _publishJsonMessage() {
-    // ignore: unused_local_variable
-    final String topic =
-        '/KRC/1'; // Specify the topic where you want to publish
-    packet_id++;
+  String createjson() {
+    // Specify the topic where you want to publish
+    // String ssid = "";
+    // final String topic = '/KRC/1';
+
+    // Increment packet ID
+    // packet_id++;
+
+    // Build the JSON payload with the SSID
     final String jsonPayload = jsonEncode(_buildJsonPayload());
-    // _publishMessage(topic, jsonPayload, retain: true);
+
+    // Log the topic, SSID, and packet ID
+    // print(
+    //     'Publishing to Topic: $topic, Packet ID: $packet_id, SSID: ${getCurrentSSID()}');
+
+    // Publish the message
     publishMessage(jsonPayload);
+
+    // Return the JSON payload
     return jsonPayload;
   }
+
+// Function to build the JSON payload
+  // Map<String, dynamic> _buildJsonPayload() {
+  //   return {
+  //     'packet_id': packet_id,
+  //     'date_time': selectedDateTime.toString(),
+  //     'ssid': getCurrentSSID(), // Include the SSID
+  //   };
+  // }
+
+// Function to get the current SSID
+  // String getCurrentSSID() {
+  //   // Placeholder for the actual implementation to get SSID
+  //   return 'Your_SSID_Here'; // Replace with the real method for retrieving SSID
+  // }
 
   void _showDateTimePicker(BuildContext context) async {
     final DateTime? pickedDate = await showDatePicker(
@@ -179,7 +207,7 @@ class _PannelState extends State<Pannel> {
           );
 
           receivedMessage = "Date & Time: ${selectedDateTime.toString()}";
-          _publishJsonMessage(); // Publish the complete JSON data
+          createjson(); // Publish the complete JSON data
         });
       }
     }
@@ -190,7 +218,7 @@ class _PannelState extends State<Pannel> {
       _isThermostatContainerVisible = !_isThermostatContainerVisible;
       _isCalendarVisible = !_isCalendarVisible;
     });
-    _publishJsonMessage(); // Publish the complete JSON data
+    createjson(); // Publish the complete JSON data
   }
 
   void _changeDamperValue(double value) {
@@ -200,7 +228,7 @@ class _PannelState extends State<Pannel> {
           value; // Update the thermostat temperature to display as Set Point
     });
     String message = "";
-    message = _publishJsonMessage(); // Publish the complete JSON data
+    message = createjson(); // Publish the complete JSON data
     publishMessage(message);
   }
 
@@ -211,7 +239,10 @@ class _PannelState extends State<Pannel> {
   String publishStatus = "";
 
   void publishMessage(String message) {
-    const String topic = "/KRC/1";
+    // const String topic = "/KRC/1";
+    String ssid = "";
+    String topic = "/KRC/" + widget.topicssid;
+
     // const String message = "Winter";
 
     if (client != null) {
@@ -243,12 +274,12 @@ class _PannelState extends State<Pannel> {
       isSummer = summer;
       receivedMessage = "Season Selected: ${summer ? 'Summer' : 'Winter'}";
       message = "Season Selected: ${summer ? 'Winter' : 'Summer'}";
-      message = _publishJsonMessage();
+      message = createjson();
       // message =
       //     "{isSummer:true,selectedDateTime:2024-11-20T16:50:26.850414,isOn:false,temperatureRange:{start:40.0,end:80.0},thermostatTemperature:20.0,lastDamperValue:50.0,receivedMessage:Season Selected: Summer,selectedDropdownOption:null}123456789000012345";
       publishMessage(message);
     });
-    // _publishJsonMessage();
+    // createjson();
     return message;
   }
 
@@ -256,7 +287,7 @@ class _PannelState extends State<Pannel> {
   //   setState(() {
   //     isSummer = summer;
   //     receivedMessage = "Season Selected: ${summer ? 'Summer' : 'Winter'}";
-  //     _publishJsonMessage(); // Publish the complete JSON data
+  //     createjson(); // Publish the complete JSON data
   //   });
   // }
 
@@ -302,7 +333,7 @@ class _PannelState extends State<Pannel> {
                                 onTap: () {
                                   // ignore: unused_local_variable
                                   String message = _selectSeason(!isSummer);
-                                  // String jsonpayloadd = _publishJsonMessage();
+                                  // String jsonpayloadd = createjson();
                                   // publishMessage(jsonpayloadd);
 
                                   // _selectSeason(!isSummer);
@@ -413,7 +444,7 @@ class _PannelState extends State<Pannel> {
                                           onChanged: (value) {
                                             setState(() {
                                               isOn = value;
-                                              _publishJsonMessage(); // Publish the complete JSON data
+                                              createjson(); // Publish the complete JSON data
                                             });
                                           },
                                           activeColor: Colors.green,
@@ -548,11 +579,11 @@ class _PannelState extends State<Pannel> {
                                     setState(() {
                                       _currentRangeValues = values;
                                       // String message = "";
-                                      // message = _publishJsonMessage();
+                                      // message = createjson();
                                       // message = "";
 
                                       // publishMessage(message);
-                                      _publishJsonMessage(); // Publish the complete JSON data
+                                      createjson(); // Publish the complete JSON data
                                     });
                                   },
                                 ),
@@ -593,7 +624,7 @@ class _PannelState extends State<Pannel> {
                                       setState(() {
                                         _thermostatTemperature =
                                             value; // Update Set Point
-                                        _publishJsonMessage(); // Publish the complete JSON data
+                                        createjson(); // Publish the complete JSON data
                                       });
                                     },
                                   ),
@@ -649,7 +680,7 @@ class _PannelState extends State<Pannel> {
                                 setState(() {
                                   _selectedOption =
                                       newValue; // Update selected option
-                                  _publishJsonMessage(); // Publish the complete JSON data
+                                  createjson(); // Publish the complete JSON data
                                 });
                               },
                               underline: Container(),
@@ -683,7 +714,7 @@ class _PannelState extends State<Pannel> {
       setState(() {
         _lastDamperValue = value ?? _lastDamperValue;
         _thermostatTemperature = _lastDamperValue; // Sync with Set Point
-        _publishJsonMessage(); // Publish the complete JSON data
+        createjson(); // Publish the complete JSON data
       });
     });
   }

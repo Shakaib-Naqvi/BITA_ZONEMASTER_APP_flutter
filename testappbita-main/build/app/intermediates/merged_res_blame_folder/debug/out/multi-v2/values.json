@@ -59,23 +59,6 @@
                     }
                 },
                 {
-                    "source": "F:\\Shakaib\\Mobile Applications\\finall_app-main\\finall_app-main\\testappbita-main\\build\\app\\generated\\res\\google-services\\debug\\values\\values.xml",
-                    "from": {
-                        "startLines": "2,3,4,5,6,7",
-                        "startColumns": "4,4,4,4,4,4",
-                        "startOffsets": "55,137,241,350,470,578",
-                        "endColumns": "81,103,108,119,107,76",
-                        "endOffsets": "132,236,345,465,573,650"
-                    },
-                    "to": {
-                        "startLines": "181,182,183,184,185,186",
-                        "startColumns": "4,4,4,4,4,4",
-                        "startOffsets": "10945,11027,11131,11240,11360,11468",
-                        "endColumns": "81,103,108,119,107,76",
-                        "endOffsets": "11022,11126,11235,11355,11463,11540"
-                    }
-                },
-                {
                     "source": "C:\\Users\\cc\\.gradle\\caches\\transforms-3\\331e6def37b6f31d44e288907978ac31\\transformed\\lifecycle-viewmodel-2.7.0\\res\\values\\values.xml",
                     "from": {
                         "startLines": "2",
@@ -90,6 +73,23 @@
                         "startOffsets": "7766",
                         "endColumns": "49",
                         "endOffsets": "7811"
+                    }
+                },
+                {
+                    "source": "F:\\Shakaib\\Mobile Applications\\ZoneMaster\\finall_app-main\\testappbita-main\\build\\app\\generated\\res\\google-services\\debug\\values\\values.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7",
+                        "startColumns": "4,4,4,4,4,4",
+                        "startOffsets": "55,137,241,350,470,578",
+                        "endColumns": "81,103,108,119,107,76",
+                        "endOffsets": "132,236,345,465,573,650"
+                    },
+                    "to": {
+                        "startLines": "181,182,183,184,185,186",
+                        "startColumns": "4,4,4,4,4,4",
+                        "startOffsets": "10945,11027,11131,11240,11360,11468",
+                        "endColumns": "81,103,108,119,107,76",
+                        "endOffsets": "11022,11126,11235,11355,11463,11540"
                     }
                 },
                 {
@@ -165,7 +165,7 @@
                     }
                 },
                 {
-                    "source": "F:\\Shakaib\\Mobile Applications\\finall_app-main\\finall_app-main\\testappbita-main\\android\\app\\src\\main\\res\\values\\styles.xml",
+                    "source": "F:\\Shakaib\\Mobile Applications\\ZoneMaster\\finall_app-main\\testappbita-main\\android\\app\\src\\main\\res\\values\\styles.xml",
                     "from": {
                         "startLines": "3,14",
                         "startColumns": "4,4",

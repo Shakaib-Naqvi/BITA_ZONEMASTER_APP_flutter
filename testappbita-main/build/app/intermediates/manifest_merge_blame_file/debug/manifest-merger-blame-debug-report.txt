@@ -13,11 +13,11 @@
 13         to allow setting breakpoints, to provide hot reload, etc.
 14    -->
 15    <uses-permission android:name="android.permission.INTERNET" />
-15-->F:\Shakaib\Mobile Applications\finall_app-main\finall_app-main\testappbita-main\android\app\src\debug\AndroidManifest.xml:6:5-66
-15-->F:\Shakaib\Mobile Applications\finall_app-main\finall_app-main\testappbita-main\android\app\src\debug\AndroidManifest.xml:6:22-64
+15-->F:\Shakaib\Mobile Applications\ZoneMaster\finall_app-main\testappbita-main\android\app\src\debug\AndroidManifest.xml:6:5-66
+15-->F:\Shakaib\Mobile Applications\ZoneMaster\finall_app-main\testappbita-main\android\app\src\debug\AndroidManifest.xml:6:22-64
 16    <uses-permission android:name="android.permission.CAMERA" />
-16-->F:\Shakaib\Mobile Applications\finall_app-main\finall_app-main\testappbita-main\android\app\src\main\AndroidManifest.xml:2:5-64
-16-->F:\Shakaib\Mobile Applications\finall_app-main\finall_app-main\testappbita-main\android\app\src\main\AndroidManifest.xml:2:22-62
+16-->F:\Shakaib\Mobile Applications\ZoneMaster\finall_app-main\testappbita-main\android\app\src\main\AndroidManifest.xml:2:5-64
+16-->F:\Shakaib\Mobile Applications\ZoneMaster\finall_app-main\testappbita-main\android\app\src\main\AndroidManifest.xml:2:22-62
 17    <!--
 18 Required to query activities that can process text, see:
 19         https://developer.android.com/training/package-visibility and
@@ -26,50 +26,50 @@
 22         In particular, this is used by the Flutter engine in io.flutter.plugin.text.ProcessTextPlugin.
 23    -->
 24    <queries>
-24-->F:\Shakaib\Mobile Applications\finall_app-main\finall_app-main\testappbita-main\android\app\src\main\AndroidManifest.xml:43:5-48:15
+24-->F:\Shakaib\Mobile Applications\ZoneMaster\finall_app-main\testappbita-main\android\app\src\main\AndroidManifest.xml:43:5-48:15
 25        <intent>
-25-->F:\Shakaib\Mobile Applications\finall_app-main\finall_app-main\testappbita-main\android\app\src\main\AndroidManifest.xml:44:9-47:18
+25-->F:\Shakaib\Mobile Applications\ZoneMaster\finall_app-main\testappbita-main\android\app\src\main\AndroidManifest.xml:44:9-47:18
 26            <action android:name="android.intent.action.PROCESS_TEXT" />
-26-->F:\Shakaib\Mobile Applications\finall_app-main\finall_app-main\testappbita-main\android\app\src\main\AndroidManifest.xml:45:13-72
-26-->F:\Shakaib\Mobile Applications\finall_app-main\finall_app-main\testappbita-main\android\app\src\main\AndroidManifest.xml:45:21-70
+26-->F:\Shakaib\Mobile Applications\ZoneMaster\finall_app-main\testappbita-main\android\app\src\main\AndroidManifest.xml:45:13-72
+26-->F:\Shakaib\Mobile Applications\ZoneMaster\finall_app-main\testappbita-main\android\app\src\main\AndroidManifest.xml:45:21-70
 27
 28            <data android:mimeType="text/plain" />
-28-->F:\Shakaib\Mobile Applications\finall_app-main\finall_app-main\testappbita-main\android\app\src\main\AndroidManifest.xml:46:13-50
-28-->F:\Shakaib\Mobile Applications\finall_app-main\finall_app-main\testappbita-main\android\app\src\main\AndroidManifest.xml:46:19-48
+28-->F:\Shakaib\Mobile Applications\ZoneMaster\finall_app-main\testappbita-main\android\app\src\main\AndroidManifest.xml:46:13-50
+28-->F:\Shakaib\Mobile Applications\ZoneMaster\finall_app-main\testappbita-main\android\app\src\main\AndroidManifest.xml:46:19-48
 29        </intent>
 30    </queries>
 31
 32    <uses-feature
-32-->[:mobile_scanner] F:\Shakaib\Mobile Applications\finall_app-main\finall_app-main\testappbita-main\build\mobile_scanner\intermediates\merged_manifest\debug\AndroidManifest.xml:9:5-11:36
+32-->[:mobile_scanner] F:\Shakaib\Mobile Applications\ZoneMaster\finall_app-main\testappbita-main\build\mobile_scanner\intermediates\merged_manifest\debug\AndroidManifest.xml:9:5-11:36
 33        android:name="android.hardware.camera"
-33-->[:mobile_scanner] F:\Shakaib\Mobile Applications\finall_app-main\finall_app-main\testappbita-main\build\mobile_scanner\intermediates\merged_manifest\debug\AndroidManifest.xml:10:9-47
+33-->[:mobile_scanner] F:\Shakaib\Mobile Applications\ZoneMaster\finall_app-main\testappbita-main\build\mobile_scanner\intermediates\merged_manifest\debug\AndroidManifest.xml:10:9-47
 34        android:required="false" />
-34-->[:mobile_scanner] F:\Shakaib\Mobile Applications\finall_app-main\finall_app-main\testappbita-main\build\mobile_scanner\intermediates\merged_manifest\debug\AndroidManifest.xml:11:9-33
+34-->[:mobile_scanner] F:\Shakaib\Mobile Applications\ZoneMaster\finall_app-main\testappbita-main\build\mobile_scanner\intermediates\merged_manifest\debug\AndroidManifest.xml:11:9-33
 35    <uses-feature android:name="android.hardware.wifi" />
-35-->[:wifi_iot] F:\Shakaib\Mobile Applications\finall_app-main\finall_app-main\testappbita-main\build\wifi_iot\intermediates\merged_manifest\debug\AndroidManifest.xml:7:5-58
-35-->[:wifi_iot] F:\Shakaib\Mobile Applications\finall_app-main\finall_app-main\testappbita-main\build\wifi_iot\intermediates\merged_manifest\debug\AndroidManifest.xml:7:19-55
+35-->[:wifi_iot] F:\Shakaib\Mobile Applications\ZoneMaster\finall_app-main\testappbita-main\build\wifi_iot\intermediates\merged_manifest\debug\AndroidManifest.xml:7:5-58
+35-->[:wifi_iot] F:\Shakaib\Mobile Applications\ZoneMaster\finall_app-main\testappbita-main\build\wifi_iot\intermediates\merged_manifest\debug\AndroidManifest.xml:7:19-55
 36
 37    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-37-->[:wifi_iot] F:\Shakaib\Mobile Applications\finall_app-main\finall_app-main\testappbita-main\build\wifi_iot\intermediates\merged_manifest\debug\AndroidManifest.xml:10:5-76
-37-->[:wifi_iot] F:\Shakaib\Mobile Applications\finall_app-main\finall_app-main\testappbita-main\build\wifi_iot\intermediates\merged_manifest\debug\AndroidManifest.xml:10:22-73
+37-->[:wifi_iot] F:\Shakaib\Mobile Applications\ZoneMaster\finall_app-main\testappbita-main\build\wifi_iot\intermediates\merged_manifest\debug\AndroidManifest.xml:10:5-76
+37-->[:wifi_iot] F:\Shakaib\Mobile Applications\ZoneMaster\finall_app-main\testappbita-main\build\wifi_iot\intermediates\merged_manifest\debug\AndroidManifest.xml:10:22-73
 38    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-38-->[:wifi_iot] F:\Shakaib\Mobile Applications\finall_app-main\finall_app-main\testappbita-main\build\wifi_iot\intermediates\merged_manifest\debug\AndroidManifest.xml:11:5-79
-38-->[:wifi_iot] F:\Shakaib\Mobile Applications\finall_app-main\finall_app-main\testappbita-main\build\wifi_iot\intermediates\merged_manifest\debug\AndroidManifest.xml:11:22-76
+38-->[:wifi_iot] F:\Shakaib\Mobile Applications\ZoneMaster\finall_app-main\testappbita-main\build\wifi_iot\intermediates\merged_manifest\debug\AndroidManifest.xml:11:5-79
+38-->[:wifi_iot] F:\Shakaib\Mobile Applications\ZoneMaster\finall_app-main\testappbita-main\build\wifi_iot\intermediates\merged_manifest\debug\AndroidManifest.xml:11:22-76
 39    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
-39-->[:wifi_iot] F:\Shakaib\Mobile Applications\finall_app-main\finall_app-main\testappbita-main\build\wifi_iot\intermediates\merged_manifest\debug\AndroidManifest.xml:12:5-79
-39-->[:wifi_iot] F:\Shakaib\Mobile Applications\finall_app-main\finall_app-main\testappbita-main\build\wifi_iot\intermediates\merged_manifest\debug\AndroidManifest.xml:12:22-76
+39-->[:wifi_iot] F:\Shakaib\Mobile Applications\ZoneMaster\finall_app-main\testappbita-main\build\wifi_iot\intermediates\merged_manifest\debug\AndroidManifest.xml:12:5-79
+39-->[:wifi_iot] F:\Shakaib\Mobile Applications\ZoneMaster\finall_app-main\testappbita-main\build\wifi_iot\intermediates\merged_manifest\debug\AndroidManifest.xml:12:22-76
 40    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-40-->[:wifi_iot] F:\Shakaib\Mobile Applications\finall_app-main\finall_app-main\testappbita-main\build\wifi_iot\intermediates\merged_manifest\debug\AndroidManifest.xml:13:5-79
-40-->[:wifi_iot] F:\Shakaib\Mobile Applications\finall_app-main\finall_app-main\testappbita-main\build\wifi_iot\intermediates\merged_manifest\debug\AndroidManifest.xml:13:22-76
+40-->[:wifi_iot] F:\Shakaib\Mobile Applications\ZoneMaster\finall_app-main\testappbita-main\build\wifi_iot\intermediates\merged_manifest\debug\AndroidManifest.xml:13:5-79
+40-->[:wifi_iot] F:\Shakaib\Mobile Applications\ZoneMaster\finall_app-main\testappbita-main\build\wifi_iot\intermediates\merged_manifest\debug\AndroidManifest.xml:13:22-76
 41    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /> <!-- TODO remove the below two permission from v1.0.0, user need to add this explicitly -->
-41-->[:wifi_iot] F:\Shakaib\Mobile Applications\finall_app-main\finall_app-main\testappbita-main\build\wifi_iot\intermediates\merged_manifest\debug\AndroidManifest.xml:14:5-81
-41-->[:wifi_iot] F:\Shakaib\Mobile Applications\finall_app-main\finall_app-main\testappbita-main\build\wifi_iot\intermediates\merged_manifest\debug\AndroidManifest.xml:14:22-78
+41-->[:wifi_iot] F:\Shakaib\Mobile Applications\ZoneMaster\finall_app-main\testappbita-main\build\wifi_iot\intermediates\merged_manifest\debug\AndroidManifest.xml:14:5-81
+41-->[:wifi_iot] F:\Shakaib\Mobile Applications\ZoneMaster\finall_app-main\testappbita-main\build\wifi_iot\intermediates\merged_manifest\debug\AndroidManifest.xml:14:22-78
 42    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
-42-->[:wifi_iot] F:\Shakaib\Mobile Applications\finall_app-main\finall_app-main\testappbita-main\build\wifi_iot\intermediates\merged_manifest\debug\AndroidManifest.xml:16:5-76
-42-->[:wifi_iot] F:\Shakaib\Mobile Applications\finall_app-main\finall_app-main\testappbita-main\build\wifi_iot\intermediates\merged_manifest\debug\AndroidManifest.xml:16:22-73
+42-->[:wifi_iot] F:\Shakaib\Mobile Applications\ZoneMaster\finall_app-main\testappbita-main\build\wifi_iot\intermediates\merged_manifest\debug\AndroidManifest.xml:16:5-76
+42-->[:wifi_iot] F:\Shakaib\Mobile Applications\ZoneMaster\finall_app-main\testappbita-main\build\wifi_iot\intermediates\merged_manifest\debug\AndroidManifest.xml:16:22-73
 43    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
-43-->[:wifi_iot] F:\Shakaib\Mobile Applications\finall_app-main\finall_app-main\testappbita-main\build\wifi_iot\intermediates\merged_manifest\debug\AndroidManifest.xml:17:5-73
-43-->[:wifi_iot] F:\Shakaib\Mobile Applications\finall_app-main\finall_app-main\testappbita-main\build\wifi_iot\intermediates\merged_manifest\debug\AndroidManifest.xml:17:22-70
+43-->[:wifi_iot] F:\Shakaib\Mobile Applications\ZoneMaster\finall_app-main\testappbita-main\build\wifi_iot\intermediates\merged_manifest\debug\AndroidManifest.xml:17:5-73
+43-->[:wifi_iot] F:\Shakaib\Mobile Applications\ZoneMaster\finall_app-main\testappbita-main\build\wifi_iot\intermediates\merged_manifest\debug\AndroidManifest.xml:17:22-70
 44    <uses-permission android:name="android.permission.WAKE_LOCK" />
 44-->[com.google.android.gms:play-services-measurement-api:22.1.2] C:\Users\cc\.gradle\caches\transforms-3\a4286464c9b5f3db9a3370199ca4cfe6\transformed\jetified-play-services-measurement-api-22.1.2\AndroidManifest.xml:24:5-68
 44-->[com.google.android.gms:play-services-measurement-api:22.1.2] C:\Users\cc\.gradle\caches\transforms-3\a4286464c9b5f3db9a3370199ca4cfe6\transformed\jetified-play-services-measurement-api-22.1.2\AndroidManifest.xml:24:22-65
@@ -142,31 +142,31 @@
 97            android:value="2" />
 98
 99        <service
-99-->[:cloud_firestore] F:\Shakaib\Mobile Applications\finall_app-main\finall_app-main\testappbita-main\build\cloud_firestore\intermediates\merged_manifest\debug\AndroidManifest.xml:8:9-12:19
+99-->[:cloud_firestore] F:\Shakaib\Mobile Applications\ZoneMaster\finall_app-main\testappbita-main\build\cloud_firestore\intermediates\merged_manifest\debug\AndroidManifest.xml:8:9-12:19
 100            android:name="com.google.firebase.components.ComponentDiscoveryService"
-100-->[:cloud_firestore] F:\Shakaib\Mobile Applications\finall_app-main\finall_app-main\testappbita-main\build\cloud_firestore\intermediates\merged_manifest\debug\AndroidManifest.xml:8:18-89
+100-->[:cloud_firestore] F:\Shakaib\Mobile Applications\ZoneMaster\finall_app-main\testappbita-main\build\cloud_firestore\intermediates\merged_manifest\debug\AndroidManifest.xml:8:18-89
 101            android:directBootAware="true"
 101-->[com.google.firebase:firebase-common:21.0.0] C:\Users\cc\.gradle\caches\transforms-3\eca4333cb219929078e4b58375a8cccc\transformed\jetified-firebase-common-21.0.0\AndroidManifest.xml:32:13-43
 102            android:exported="false" >
 102-->[com.google.firebase:firebase-firestore:25.1.1] C:\Users\cc\.gradle\caches\transforms-3\0c89f7e1e56a74fe9c2a62c6f86d375b\transformed\jetified-firebase-firestore-25.1.1\AndroidManifest.xml:16:13-37
 103            <meta-data
-103-->[:cloud_firestore] F:\Shakaib\Mobile Applications\finall_app-main\finall_app-main\testappbita-main\build\cloud_firestore\intermediates\merged_manifest\debug\AndroidManifest.xml:9:13-11:85
+103-->[:cloud_firestore] F:\Shakaib\Mobile Applications\ZoneMaster\finall_app-main\testappbita-main\build\cloud_firestore\intermediates\merged_manifest\debug\AndroidManifest.xml:9:13-11:85
 104                android:name="com.google.firebase.components:io.flutter.plugins.firebase.firestore.FlutterFirebaseFirestoreRegistrar"
-104-->[:cloud_firestore] F:\Shakaib\Mobile Applications\finall_app-main\finall_app-main\testappbita-main\build\cloud_firestore\intermediates\merged_manifest\debug\AndroidManifest.xml:10:17-134
+104-->[:cloud_firestore] F:\Shakaib\Mobile Applications\ZoneMaster\finall_app-main\testappbita-main\build\cloud_firestore\intermediates\merged_manifest\debug\AndroidManifest.xml:10:17-134
 105                android:value="com.google.firebase.components.ComponentRegistrar" />
-105-->[:cloud_firestore] F:\Shakaib\Mobile Applications\finall_app-main\finall_app-main\testappbita-main\build\cloud_firestore\intermediates\merged_manifest\debug\AndroidManifest.xml:11:17-82
+105-->[:cloud_firestore] F:\Shakaib\Mobile Applications\ZoneMaster\finall_app-main\testappbita-main\build\cloud_firestore\intermediates\merged_manifest\debug\AndroidManifest.xml:11:17-82
 106            <meta-data
-106-->[:firebase_storage] F:\Shakaib\Mobile Applications\finall_app-main\finall_app-main\testappbita-main\build\firebase_storage\intermediates\merged_manifest\debug\AndroidManifest.xml:9:13-11:85
+106-->[:firebase_storage] F:\Shakaib\Mobile Applications\ZoneMaster\finall_app-main\testappbita-main\build\firebase_storage\intermediates\merged_manifest\debug\AndroidManifest.xml:9:13-11:85
 107                android:name="com.google.firebase.components:io.flutter.plugins.firebase.storage.FlutterFirebaseAppRegistrar"
-107-->[:firebase_storage] F:\Shakaib\Mobile Applications\finall_app-main\finall_app-main\testappbita-main\build\firebase_storage\intermediates\merged_manifest\debug\AndroidManifest.xml:10:17-126
+107-->[:firebase_storage] F:\Shakaib\Mobile Applications\ZoneMaster\finall_app-main\testappbita-main\build\firebase_storage\intermediates\merged_manifest\debug\AndroidManifest.xml:10:17-126
 108                android:value="com.google.firebase.components.ComponentRegistrar" />
-108-->[:firebase_storage] F:\Shakaib\Mobile Applications\finall_app-main\finall_app-main\testappbita-main\build\firebase_storage\intermediates\merged_manifest\debug\AndroidManifest.xml:11:17-82
+108-->[:firebase_storage] F:\Shakaib\Mobile Applications\ZoneMaster\finall_app-main\testappbita-main\build\firebase_storage\intermediates\merged_manifest\debug\AndroidManifest.xml:11:17-82
 109            <meta-data
-109-->[:firebase_core] F:\Shakaib\Mobile Applications\finall_app-main\finall_app-main\testappbita-main\build\firebase_core\intermediates\merged_manifest\debug\AndroidManifest.xml:9:13-11:85
+109-->[:firebase_core] F:\Shakaib\Mobile Applications\ZoneMaster\finall_app-main\testappbita-main\build\firebase_core\intermediates\merged_manifest\debug\AndroidManifest.xml:9:13-11:85
 110                android:name="com.google.firebase.components:io.flutter.plugins.firebase.core.FlutterFirebaseCoreRegistrar"
-110-->[:firebase_core] F:\Shakaib\Mobile Applications\finall_app-main\finall_app-main\testappbita-main\build\firebase_core\intermediates\merged_manifest\debug\AndroidManifest.xml:10:17-124
+110-->[:firebase_core] F:\Shakaib\Mobile Applications\ZoneMaster\finall_app-main\testappbita-main\build\firebase_core\intermediates\merged_manifest\debug\AndroidManifest.xml:10:17-124
 111                android:value="com.google.firebase.components.ComponentRegistrar" />
-111-->[:firebase_core] F:\Shakaib\Mobile Applications\finall_app-main\finall_app-main\testappbita-main\build\firebase_core\intermediates\merged_manifest\debug\AndroidManifest.xml:11:17-82
+111-->[:firebase_core] F:\Shakaib\Mobile Applications\ZoneMaster\finall_app-main\testappbita-main\build\firebase_core\intermediates\merged_manifest\debug\AndroidManifest.xml:11:17-82
 112            <meta-data
 112-->[com.google.firebase:firebase-firestore:25.1.1] C:\Users\cc\.gradle\caches\transforms-3\0c89f7e1e56a74fe9c2a62c6f86d375b\transformed\jetified-firebase-firestore-25.1.1\AndroidManifest.xml:17:13-19:85
 113                android:name="com.google.firebase.components:com.google.firebase.firestore.FirebaseFirestoreKtxRegistrar"
