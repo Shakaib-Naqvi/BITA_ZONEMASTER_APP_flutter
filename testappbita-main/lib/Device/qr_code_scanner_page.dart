@@ -89,7 +89,7 @@ class _QRCodeScannerState extends State<QRCodeScanner> {
 
   void _parseQRCode(String code) {
     final wifiRegex = RegExp(
-        r'WIFI:T:[^;]*;S:(?<ssid>[^;]*);P:(?<password>[^;]*);H:(?:true|false);;');
+        r'WIFI:T:[^;]*;S:(?<ssid>[^;]*);P:(?<password>[^;]*);H:(?:true|false|);');
 
     final wifiMatch = wifiRegex.firstMatch(code);
 
@@ -100,7 +100,7 @@ class _QRCodeScannerState extends State<QRCodeScanner> {
         // saveDevice("1", widget.email, ssid, password);
         // saveDevice(ssid.toString(), ssid, password, "12313");
 
-        _connectToWiFi(ssid, password);
+        // _connectToWiFi(ssid, password);
         //  _showWiFiDialog(ssid);
         _showWiFiDialog(ssid, password);
         _showdevicenameDialog(ssid, password);
@@ -417,7 +417,8 @@ class _QRCodeScannerState extends State<QRCodeScanner> {
                 }
                 // id++;
                 // saveDevice(ssid.toString(), ssidd, pass, ip);
-                saveDevice(widget.email, id, ip, mac, ssidd, ssid);
+                String deviceid = ssid;
+                saveDevice(widget.email, deviceid, ip, mac, ssidd, ssid);
                 Navigator.of(context).pop();
               },
             ),
@@ -628,26 +629,26 @@ class _ConnectionResultScreenState extends State<ConnectionResultScreen> {
     }
   }
 
-  Future<void> _connectToWiFi(String ssid, String password) async {
-    bool result =
-        await WiFiForIoTPlugin.findAndConnect(ssid, password: password);
-    String connectionStatusMessage =
-        result ? 'Connected to $ssid' : 'Failed to connect to $ssid';
+  // Future<void> _connectToWiFi(String ssid, String password) async {
+  //   bool result =
+  //       await WiFiForIoTPlugin.findAndConnect(ssid, password: password);
+  //   String connectionStatusMessage =
+  //       result ? 'Connected to $ssid' : 'Failed to connect to $ssid';
 
-    setState(() {
-      connectionStatus = connectionStatusMessage;
-    });
+  //   setState(() {
+  //     connectionStatus = connectionStatusMessage;
+  //   });
 
-    if (result) {
-      // Navigate to the Pannel screen directly upon a successful connection
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => Pannel(topicssid: ssid)),
-      );
-    } else {
-      _showConnectionStatusDialog(context, connectionStatusMessage);
-    }
-  }
+  //   if (result) {
+  //     // Navigate to the Pannel screen directly upon a successful connection
+  //     Navigator.pushReplacement(
+  //       context,
+  //       MaterialPageRoute(builder: (context) => Pannel(topicssid: ssid)),
+  //     );
+  //   } else {
+  //     _showConnectionStatusDialog(context, connectionStatusMessage);
+  //   }
+  // }
 
   void _showConnectionStatusDialog(BuildContext context, String message) {
     showDialog(
@@ -700,7 +701,7 @@ class _ConnectionResultScreenState extends State<ConnectionResultScreen> {
                 final name = nameController.text;
                 final password = passwordController.text;
                 if (name.isNotEmpty) {
-                  _connectToWiFi(ssid, password);
+                  // _connectToWiFi(ssid, password);
                 } else {
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(content: Text("Please provide a name.")),

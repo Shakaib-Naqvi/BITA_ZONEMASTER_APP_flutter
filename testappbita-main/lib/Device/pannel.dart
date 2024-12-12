@@ -240,8 +240,8 @@ class _PannelState extends State<Pannel> {
 
   void publishMessage(String message) {
     // const String topic = "/KRC/1";
-    String ssid = "";
-    String topic = "/KRC/" + widget.topicssid;
+    // String ssid = "";
+    String topic = "/KRC/${widget.topicssid}";
 
     // const String message = "Winter";
 
@@ -666,10 +666,10 @@ class _PannelState extends State<Pannel> {
                               value: _selectedOption, // Current selected value
                               items: <String>[
                                 '/KRC/1',
-                                '/KRC/2',
-                                '/KRC/3',
-                                '/KRC/4',
-                                '/KRC/5'
+                                // '/KRC/2',
+                                // '/KRC/3',
+                                // '/KRC/4',
+                                // '/KRC/5'
                               ].map((String value) {
                                 return DropdownMenuItem<String>(
                                   value: value,

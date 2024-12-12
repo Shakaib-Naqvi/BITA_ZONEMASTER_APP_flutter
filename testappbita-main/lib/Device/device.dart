@@ -54,6 +54,7 @@ class DevicesPage extends StatefulWidget {
 
 class _DevicesPageState extends State<DevicesPage> {
   int _selectedIndex = 0;
+  String topicssid = "";
 
   void _onItemTapped(int index) {
     setState(() {
@@ -236,17 +237,70 @@ class _DevicesPageState extends State<DevicesPage> {
                             onTap: () {
                               Navigator.push(
                                 context,
+
                                 MaterialPageRoute(
                                     builder: (context) => Pannel(
-                                          topicssid: (device["device name"] ??
-                                              'No name'),
-                                        )), // Replace with your target screen
+                                        topicssid: (device["device id"] ??
+                                            'No name'))), // Replace with your target screen
                               );
                               // _showConnectionDialog(
                               // context,
                               // connection['ssid'] ??
                               //     ''); // Ensure a valid string
                             },
+                            onLongPress: () {
+                              showDialog(
+                                  context: context,
+                                  builder: (context) => AlertDialog(
+                                        title: Text("Delete Device"),
+                                        content: Text(
+                                            "Are you sure you want to delete this device? "),
+                                        actions: [
+                                          TextButton(
+                                              onPressed: () {
+                                                Navigator.of(context).pop();
+                                              },
+                                              child: Text("Cancel")),
+                                          TextButton(
+                                              onPressed: () async {
+                                                await FirebaseFirestore.instance
+                                                    .runTransaction(
+                                                        (transaction) async {
+                                                  // Get a fresh snapshot of the document to delete
+                                                  DocumentSnapshot
+                                                      freshSnapshot =
+                                                      await transaction.get(
+                                                          device.reference);
+                                                  transaction.delete(
+                                                      freshSnapshot.reference);
+                                                }).then((_) {
+                                                  ScaffoldMessenger.of(context)
+                                                      .showSnackBar(
+                                                    SnackBar(
+                                                        content: Text(
+                                                            'Document deleted successfully!')),
+                                                  );
+                                                }).catchError((error) {
+                                                  ScaffoldMessenger.of(context)
+                                                      .showSnackBar(
+                                                    SnackBar(
+                                                        content: Text(
+                                                            'Failed to delete document: $error')),
+                                                  );
+                                                });
+                                                Navigator.of(context).pop();
+                                              },
+                                              child: Text("Delete"))
+                                        ],
+                                      ));
+                            },
+                            // onTap: () =>
+                            //               // Remove the tapped document here - how?
+                            //               print(snapshot.data.documents[index]["id"])
+                            //               Firestore.instance.collection("chats").document("ROOM_1")
+                            //               .collection("messages").document(snapshot.data.documents[index]["id"])
+                            //               .delete();
+                            //           )
                             child: Padding(
                               padding: const EdgeInsets.all(10.0),
                               child: Center(
